@@ -2,8 +2,12 @@
   "cleanUrls": true,
   "rewrites": [
     {
+      "source": "/api/:path*",
+      "destination": "http://zara.hidencloud.com:24631/api/:path*"
+    },
+    {
       "source": "/callback",
-      "destination": "destination": "http://zara.hidencloud.com:24631/api/:path*"
+      "destination": "/callback.html"
     }
   ]
 }
