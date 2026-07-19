@@ -3,7 +3,7 @@
   "rewrites": [
     {
       "source": "/callback",
-      "destination": "/callback.html"
+      "destination": "destination": "http://zara.hidencloud.com:24631/api/:path*"
     }
   ]
 }
