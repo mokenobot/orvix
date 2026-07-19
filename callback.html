@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciando Sesión - Orvix Security</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dashboard-body" style="justify-content: center; align-items: center; display: flex;">
+    <div class="overlay-screen" style="position: static;">
+        <div class="animated-spinner"></div>
+        <h2 id="status-txt">Conectando con Orvix Backend...</h2>
+        <p id="sub-txt" style="color: var(--text-muted); margin-top: 0.5rem; font-size: 0.95rem;">Por favor, espera un momento.</p>
+        <a href="/" id="retry-btn" class="btn-glow-primary" style="display: none; margin-top: 1.5rem;">Volver al Inicio</a>
+    </div>
+
+    <script>
+        const API_BASE = 'http://zara.hidencloud.com:24631';
+        const statusTxt = document.getElementById('status-txt');
+        const subTxt = document.getElementById('sub-txt');
+        const retryBtn = document.getElementById('retry-btn');
+        const spinner = document.querySelector('.animated-spinner');
+
+        const code = new URLSearchParams(window.location.search).get('code');
+
+        if (!code) {
+            showError('No se recibió código de autorización de Discord.');
+        } else {
+            exchangeCode();
+        }
+
+        async function exchangeCode() {
+            try {
+                const response = await fetch(`${API_BASE}/api/auth/callback?code=${code}`);
+                const data = await response.json();
+
+                if (response.ok && data.token) {
+                    localStorage.setItem('discord_token', data.token);
+                    statusTxt.textContent = '¡Sesión Iniciada!';
+                    subTxt.textContent = 'Redirigiendo a tu Panel de Control...';
+                    setTimeout(() => {
+                        window.location.href = '/dashboard.html';
+                    }, 1000);
+                } else {
+                    showError(data.error || 'No se pudo intercambiar el código por el token de Discord.');
+                }
+            } catch (err) {
+                console.error(err);
+                showError('Error de red al conectar con el servidor del bot. Asegúrate de que el bot esté encendido en Hidencloud.');
+            }
+        }
+
+        function showError(msg) {
+            spinner.style.display = 'none';
+            statusTxt.textContent = 'Error de Autenticación';
+            statusTxt.style.color = 'var(--error)';
+            subTxt.textContent = msg;
+            retryBtn.style.display = 'inline-flex';
+        }
+    </script>
+</body>
+</html>

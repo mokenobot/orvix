@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orvix Security - Bot AntiRaid y Moderación de Discord</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body class="landing-body">
+    <div class="mesh-gradient"></div>
+
+    <nav class="nav-pill" data-aos="fade-down" data-aos-duration="1000">
+        <div class="nav-logo">
+            <img src="https://media.discordapp.net/attachments/1495355837869330542/1496602195796295752/standard.gif?ex=69ea7ae9&is=69e92969&hm=0b5e1626ff31b39a719d5ad68969582fd175953d2feea254661c828d80ffaebe&=" alt="Orvix Logo">
+            <span>Orvix <strong>Security</strong></span>
+        </div>
+        <div class="nav-links-wrapper">
+            <a href="#features">Características</a>
+            <a href="#mockup">Tecnología</a>
+            <a href="https://discord.com/oauth2/authorize?client_id=1496434065375629362&response_type=code&redirect_uri=https%3A%2F%2Forvixbot.vercel.app%2Fcallback&scope=identify+guilds" class="btn-nav-login"><i class="fa-brands fa-discord"></i> Panel</a>
+        </div>
+    </nav>
+
+    <header class="hero-section">
+        <div class="hero-container">
+            <div class="hero-badge" data-aos="fade-up" data-aos-duration="800">
+                <span class="pulse-dot"></span> Próxima Generación AntiRaid
+            </div>
+            <h1 data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
+                Protección definitiva para tu servidor de <span>Discord</span>
+            </h1>
+            <p data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                Orvix Security actúa en milisegundos detectando ataques, bloqueando spam y manteniendo tu comunidad 100% segura con inteligencia proactiva.
+            </p>
+            <div class="hero-cta-group" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
+                <a href="#" class="btn-glow-primary"><i class="fa-solid fa-plus"></i> Añadir a Discord</a>
+                <a href="https://discord.com/oauth2/authorize?client_id=1496434065375629362&response_type=code&redirect_uri=https%3A%2F%2Forvixbot.vercel.app%2Fcallback&scope=identify+guilds" class="btn-glass"><i class="fa-solid fa-sliders"></i> Abrir Panel</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="mockup" class="mockup-section" data-aos="fade-up" data-aos-duration="1200">
+        <div class="terminal-container">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="terminal-title">orvix-console-logs</div>
+            </div>
+            <div class="terminal-body">
+                <p class="t-line"><span class="t-purple">[INFO]</span> Orvix Security v1.2.0 conectado exitosamente a Discord API.</p>
+                <p class="t-line"><span class="t-green">[OK]</span> Sistema AntiRaid iniciado: Monitoreando 34,203 usuarios.</p>
+                <p class="t-line"><span class="t-blue">[DATABASE]</span> Blacklist global cargada: 14,892 cuentas maliciosas en cuarentena.</p>
+                <p class="t-line alert-line"><span class="t-red">[BLOQUEADO]</span> Intento de raid masiva detectado en #general. Sanción aplicada: Ban masivo (12 bots).</p>
+                <p class="t-line cursor-line">Orvix Security listo para defender_</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features-section">
+        <div class="section-header" data-aos="fade-up">
+            <h2>Módulos de Seguridad Inteligentes</h2>
+            <p>Diseñados con precisión quirúrgica para detener amenazas de inmediato.</p>
+        </div>
+        <div class="features-grid-custom">
+            <div class="glass-feature-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="card-glow"></div>
+                <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <h3>Anti-Raid en Tiempo Real</h3>
+                <p>Nuestros algoritmos detectan picos de ingresos rápidos de usuarios y detienen automáticamente el ataque.</p>
+            </div>
+            <div class="glass-feature-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="card-glow"></div>
+                <div class="feature-icon"><i class="fa-solid fa-message"></i></div>
+                <h3>Filtro Anti-Flood y Palabras</h3>
+                <p>Dile adiós al spam continuo e insultos molestos. Aplica aislamientos y advertencias automáticamente.</p>
+            </div>
+            <div class="glass-feature-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="card-glow"></div>
+                <div class="feature-icon"><i class="fa-solid fa-globe"></i></div>
+                <h3>Sincronización de Blacklist</h3>
+                <p>Tu servidor estará protegido por una red unificada de baneos globales compartidos en tiempo real.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="landing-footer">
+        <p>&copy; 2026 Orvix Security. Todo el poder en tus manos.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true });
+    </script>
+</body>
+</html>

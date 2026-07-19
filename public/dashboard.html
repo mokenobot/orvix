@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Control - Orvix Security</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-body">
+    
+    <!-- BARRA LATERAL SIMPLIFICADA Y LIMPIA -->
+    <aside class="dashboard-sidebar">
+        <div class="sidebar-top">
+            <div class="sidebar-logo">
+                <img src="https://media.discordapp.net/attachments/1495355837869330542/1496602195796295752/standard.gif?ex=69ea7ae9&is=69e92969&hm=0b5e1626ff31b39a719d5ad68969582fd175953d2feea254661c828d80ffaebe&=" alt="Orvix Logo">
+                <div class="logo-meta">
+                    <h3>Orvix</h3>
+                    <span>CONTROL PANEL</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-grp">
+                    <span class="grp-label">GENERAL</span>
+                    <a href="#" class="nav-item disabled">
+                        <i class="fa-solid fa-square-poll-vertical"></i> Estadísticas <span class="soon-badge">SOON</span>
+                    </a>
+                    <a href="#" class="nav-item active" id="nav-servers-btn">
+                        <i class="fa-solid fa-server"></i> Mis Servidores
+                    </a>
+                    <a href="#" class="nav-item disabled">
+                        <i class="fa-solid fa-crown"></i> Premium <span class="soon-badge">SOON</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+
+        <div class="sidebar-bottom">
+            <a href="#" class="support-button">
+                <i class="fa-brands fa-discord"></i> Soporte Oficial
+            </a>
+            
+            <div class="user-info-card" id="user-info">
+                <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar" class="avatar-img" id="user-avatar-img">
+                <span class="user-tag" id="user-tag-txt">Cargando...</span>
+            </div>
+
+            <a href="index.html" class="logout-button">
+                <i class="fa-solid fa-power-off"></i> Cerrar Sesión
+            </a>
+        </div>
+    </aside>
+
+    <!-- AREA DE CONTENIDO -->
+    <main class="dashboard-content">
+        <!-- Overlay Loading/Error -->
+        <div id="status-overlay" class="overlay-screen">
+            <div class="animated-spinner"></div>
+            <h2 id="status-message">Autenticando con Discord...</h2>
+            <a href="https://discord.com/oauth2/authorize?client_id=1496434065375629362&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fcallback&scope=identify+guilds" id="relogin-btn" class="btn-glow-primary" style="display: none; margin-top: 1.5rem;">Reintentar login</a>
+        </div>
+
+        <div class="content-scrollable">
+            <!-- VISTA 1: Lista de Servidores -->
+            <section id="view-servers" class="dashboard-section-view">
+                <div class="top-meta-badge">
+                    <span class="pulse-green"></span> PANEL DE CONTROL
+                </div>
+                <h1 class="dash-title">Mis Servidores</h1>
+                <p class="dash-subtitle">Selecciona un servidor para configurar las opciones de seguridad de Orvix.</p>
+                
+                <div class="servers-grid-container" id="servers-grid">
+                    <!-- Dinámico por JS -->
+                </div>
+            </section>
+
+            <!-- VISTA 2: Ajustes de un Servidor -->
+            <section id="view-settings" class="dashboard-section-view" style="display: none;">
+                <div class="back-link-wrapper" id="back-to-servers-btn">
+                    <i class="fa-solid fa-arrow-left"></i> Volver a la lista de servidores
+                </div>
+                
+                <h1 class="dash-title" id="settings-guild-title">Configuración</h1>
+                <p class="dash-subtitle">Establece límites y activa la IA anti-raid para este servidor.</p>
+
+                <!-- Panel de módulos de seguridad -->
+                <div class="modules-grid-layout">
+                    <!-- Anti-Everyone -->
+                    <div class="premium-card">
+                        <div class="card-glow-bg"></div>
+                        <div class="card-header-flex">
+                            <h3>Anti-Everyone</h3>
+                            <label class="switch-modern">
+                                <input type="checkbox" id="toggle-antiEveryone">
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                        <p class="card-desc">Sanciona a usuarios o bots que intenten hacer menciones masivas (@everyone, @here).</p>
+                        <div class="card-options">
+                            <label class="input-lbl">Sanción del bot:</label>
+                            <select id="sancion-antiEveryone" class="custom-select">
+                                <option value="warn">Warn (Advertir)</option>
+                                <option value="kick">Kick (Expulsar)</option>
+                                <option value="ban">Ban (Banear)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Anti-Flood -->
+                    <div class="premium-card">
+                        <div class="card-glow-bg"></div>
+                        <div class="card-header-flex">
+                            <h3>Anti-Spam / Flood</h3>
+                            <label class="switch-modern">
+                                <input type="checkbox" id="toggle-antiFlood">
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                        <p class="card-desc">Bloquea y penaliza a usuarios que envíen mensajes de forma masiva y repetitiva.</p>
+                        <div class="card-options">
+                            <label class="input-lbl">Sanción del bot:</label>
+                            <select id="sancion-antiFlood" class="custom-select">
+                                <option value="warn">Warn</option>
+                                <option value="timeout">Timeout (Aislamiento)</option>
+                                <option value="kick">Kick</option>
+                                <option value="ban">Ban</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Anti-Palabras -->
+                    <div class="premium-card">
+                        <div class="card-glow-bg"></div>
+                        <div class="card-header-flex">
+                            <h3>Filtro de Palabras</h3>
+                            <label class="switch-modern">
+                                <input type="checkbox" id="toggle-antiPalabras">
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                        <p class="card-desc">Elimina automáticamente mensajes que contengan términos no permitidos y aplica sanciones.</p>
+                        <div class="card-options">
+                            <label class="input-lbl">Sanción del bot:</label>
+                            <select id="sancion-antiPalabras" class="custom-select">
+                                <option value="warn">Warn</option>
+                                <option value="timeout">Timeout</option>
+                                <option value="kick">Kick</option>
+                                <option value="ban">Ban</option>
+                            </select>
+                            <label class="input-lbl" style="margin-top: 1rem;">Lista de palabras bloqueadas (separadas por comas):</label>
+                            <textarea id="words-antiPalabras" class="custom-textarea" placeholder="Ej: spam, link, insulto"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Baneos Globales -->
+                    <div class="premium-card">
+                        <div class="card-glow-bg"></div>
+                        <div class="card-header-flex">
+                            <h3>Baneos Globales</h3>
+                            <label class="switch-modern">
+                                <input type="checkbox" id="toggle-globalBans">
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                        <p class="card-desc">Activa la sincronización en tiempo real con la lista negra colectiva de Orvix Security.</p>
+                    </div>
+
+                    <!-- Anti-Bots -->
+                    <div class="premium-card">
+                        <div class="card-glow-bg"></div>
+                        <div class="card-header-flex">
+                            <h3>Anti-Bots Maliciosos</h3>
+                            <label class="switch-modern">
+                                <input type="checkbox" id="toggle-antiBots">
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                        <p class="card-desc">Evita que bots no autorizados se unan y tengan la capacidad de destruir canales.</p>
+                    </div>
+                </div>
+
+                <div class="save-bar">
+                    <button id="saveConfigBtn" class="btn-glow-primary">
+                        Guardar Configuración <i class="fa-solid fa-check" style="margin-left: 8px;"></i>
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <!-- Toast de Notificaciones Moderno -->
+        <div id="toast-notif" class="toast-card">
+            <span class="toast-indicator"></span>
+            <div class="toast-body-content">
+                <h4 id="toast-title">Acción realizada</h4>
+                <p id="toast-message-txt">El cambio ha sido guardado exitosamente.</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
