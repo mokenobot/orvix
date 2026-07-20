@@ -1,4 +1,4 @@
-/* SISTEMA DE DISEÑO PREMIUM ORVIX SECURITY */
+﻿/* SISTEMA DE DISEÑO PREMIUM Mokeno Security */
 :root {
     --bg-black: #050505;
     --bg-darker: #0c0c0e;
@@ -832,4 +832,67 @@ body {
 .toast-body-content p {
     font-size: 0.8rem;
     color: var(--text-muted);
+}
+
+/* --- RESPONSIVE / MOBILE DESIGN --- */
+@media (max-width: 800px) {
+    /* Landing Page Responsive */
+    .nav-pill {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+        border-radius: 20px;
+    }
+    .hero-section h1 {
+        font-size: 2.5rem;
+    }
+    .hero-cta-group {
+        flex-direction: column;
+        width: 100%;
+    }
+    .hero-cta-group a {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    /* Dashboard Responsive */
+    .dashboard-body {
+        flex-direction: column;
+        height: auto;
+        overflow: auto;
+    }
+    .dashboard-sidebar {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding: 1.5rem;
+    }
+    .sidebar-logo {
+        margin-bottom: 1.5rem;
+    }
+    .content-scrollable {
+        padding: 1.5rem 1rem;
+        height: auto;
+        overflow: visible;
+    }
+    .servers-grid-container {
+        grid-template-columns: 1fr;
+    }
+    .modules-grid-layout {
+        grid-template-columns: 1fr;
+    }
+    .dash-title {
+        font-size: 1.8rem;
+    }
+    .premium-server-card {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+    .premium-server-card .btn-card-action {
+        width: 100%;
+        text-align: center;
+        margin-top: 1rem;
+    }
 }
